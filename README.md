@@ -1,4 +1,5 @@
 # claire-tools
+Status: ![status](https://api.travis-ci.org/lephix/claire-tools.svg)
 Tools for claire's work.
 
 ## collectPODTracing
