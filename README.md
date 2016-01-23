@@ -2,7 +2,7 @@
 Tools for claire's work.
 
 ## collectPODTracing
-Command for collecting all languages' POD progress and save them to tracing file.
+Command for collecting all languages' POD progress and save the progress to tracing file.
 
 collectPODTracing.properties sample.
 ```
