@@ -1,6 +1,7 @@
 # claire-tools
-Status: ![status](https://api.travis-ci.org/lephix/claire-tools.svg)
 Tools for claire's work.
+
+Status: ![status](https://api.travis-ci.org/lephix/claire-tools.svg)
 
 ## collectPODTracing
 Command for collecting all languages' POD progress and save the progress to tracing file.
