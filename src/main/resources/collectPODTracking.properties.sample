@@ -1,4 +1,4 @@
-command.name=collectPODTracing
+command.name=collectPODTracking
 
 source.folder.path=/Users/longxiang/Desktop
 source.path.pattern=POD_checklist_Office.*xlsx

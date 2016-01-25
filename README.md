@@ -11,12 +11,12 @@ Status: ![status](https://api.travis-ci.org/lephix/claire-tools.svg)
 
 # Command List
 
-## collectPODTracing
-Command for collecting all languages' POD progress and save the progress to tracing file.
+## collectPODTracking
+Command for collecting all languages' POD progress and save the progress to tracking file.
 
-collectPODTracing.properties sample.
+collectPODTracking.properties sample.
 ```
-command.name=collectPODTracing
+command.name=collectPODTracking
 
 source.folder.path=/Users/longxiang/Desktop
 source.path.pattern=POD_checklist_Office.*xlsx

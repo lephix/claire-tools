@@ -1,6 +1,6 @@
 package com.lephix.clairetools;
 
-import com.lephix.clairetools.command.CollectPODTracing;
+import com.lephix.clairetools.command.CollectPODTracking;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +33,9 @@ public class Application implements CommandLineRunner {
 
         try {
             switch (commandName) {
-                case "collectPODTracing":
-                    CollectPODTracing collectPODTracing = new CollectPODTracing(environment);
-                    collectPODTracing.run();
+                case "collectPODTracking":
+                    CollectPODTracking collectPODTracking = new CollectPODTracking(environment);
+                    collectPODTracking.run();
                     break;
                 default:
                     LOG.info("No command.name matches. Exit.");

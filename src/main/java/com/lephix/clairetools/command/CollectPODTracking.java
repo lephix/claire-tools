@@ -19,12 +19,12 @@ import java.util.Map;
  *
  * Created by longxiang on 16/1/21.
  */
-public class CollectPODTracing {
-    private static final Logger LOG = LoggerFactory.getLogger(CollectPODTracing.class);
+public class CollectPODTracking {
+    private static final Logger LOG = LoggerFactory.getLogger(CollectPODTracking.class);
 
     Environment environment;
 
-    public CollectPODTracing(Environment environment) {
+    public CollectPODTracking(Environment environment) {
         this.environment = environment;
     }
 
@@ -42,8 +42,8 @@ public class CollectPODTracing {
 
         File folder = new File(sourceFolderPath);
         if (!folder.isDirectory()) {
-            LOG.error("folder.path is not a foler.");
-            return;
+            LOG.error("source.folder.path={} is not a folder.", sourceFolderPath);
+            throw new RuntimeException("Configuration error.");
         }
 
         FilenameFilter filenameFilter = new FilenameFilter() {
@@ -65,9 +65,9 @@ public class CollectPODTracing {
                 String sourceLanguageCode = extractLanguageCode(file.getName());
                 int rowNum = findTargetRowNum(codeMap, sourceLanguageCode);
 
-                targetSheet.getRow(rowNum).getCell(targetWeekCol).setCellValue(value.doubleValue());
+                targetSheet.getRow(rowNum).getCell(targetWeekCol).setCellValue(value.doubleValue() * 100);
             } catch (Exception e) {
-                throw new RuntimeException("Found error during processing file " + file.getAbsolutePath());
+                LOG.error("Found error {} during processing file {}.", e.getMessage(), file.getAbsolutePath());
             }
         }
 
