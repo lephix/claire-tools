@@ -66,6 +66,7 @@ public class CollectPODTracking {
                 int rowNum = findTargetRowNum(codeMap, sourceLanguageCode);
 
                 targetSheet.getRow(rowNum).getCell(targetWeekCol).setCellValue(value.doubleValue() * 100);
+                LOG.info("Processed file {} successfully.", file.getAbsolutePath());
             } catch (Exception e) {
                 LOG.error("Found error {} during processing file {}.", e.getMessage(), file.getAbsolutePath());
             }
