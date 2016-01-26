@@ -2,6 +2,7 @@ package com.lephix.clairetools.command;
 
 import com.google.common.collect.Maps;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
@@ -65,10 +66,12 @@ public class CollectPODTracking {
                 String sourceLanguageCode = extractLanguageCode(file.getName());
                 int rowNum = findTargetRowNum(codeMap, sourceLanguageCode);
 
-                targetSheet.getRow(rowNum).getCell(targetWeekCol).setCellValue(value.doubleValue() * 100);
+                targetSheet.getRow(rowNum).getCell(targetWeekCol, Row.CREATE_NULL_AS_BLANK)
+                        .setCellValue(value.doubleValue() * 100);
                 LOG.info("Processed file {} successfully.", file.getAbsolutePath());
             } catch (Exception e) {
                 LOG.error("Found error {} during processing file {}.", e.getMessage(), file.getAbsolutePath());
+                LOG.error("Error details.", e);
             }
         }
 
@@ -91,12 +94,17 @@ public class CollectPODTracking {
     }
 
     private Number extractValue(File file) throws IOException, InvalidFormatException {
-        Workbook sourceWb = WorkbookFactory.create(file);
-        Sheet sheet = sourceWb.getSheetAt(0);
-        Number cellValue = sheet.getRow(37).getCell(1).getNumericCellValue();
-        sourceWb.close();
+        try {
+            Workbook sourceWb = WorkbookFactory.create(file);
+            Sheet sheet = sourceWb.getSheetAt(0);
+            Number cellValue = sheet.getRow(37).getCell(1).getNumericCellValue();
+            sourceWb.close();
 
-        return cellValue;
+            return cellValue;
+        } catch (Exception e) {
+            LOG.error("File {} has no value, using 0 instead.", file.getAbsolutePath());
+            return 0;
+        }
     }
 
     private String extractLanguageCode(String fileName) {

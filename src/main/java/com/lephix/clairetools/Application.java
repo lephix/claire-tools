@@ -25,7 +25,7 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        String commandName = environment.getProperty("command.name");
+        String commandName = environment.getProperty("command.name").trim();
         if (StringUtils.isEmpty(commandName)) {
             LOG.info("No command.name configuration found. Exit.");
             return;
