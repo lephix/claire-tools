@@ -2,10 +2,7 @@ package com.lephix.clairetools.command;
 
 import com.google.common.collect.Maps;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,10 +81,11 @@ public class CollectPODTracking {
     private Map<String, Integer> buildCodeMap(Sheet sheet, Integer languageCodeCol, int languageCodeRowStart) {
         Map<String, Integer> codeMap = Maps.newHashMap();
         for (int rowNum = languageCodeRowStart; rowNum < sheet.getLastRowNum(); rowNum++) {
-            String codeValue = sheet.getRow(rowNum)
-                    .getCell(languageCodeCol)
-                    .getStringCellValue();
-            codeMap.put(codeValue, rowNum);
+            Cell cell = sheet.getRow(rowNum).getCell(languageCodeCol);
+            if (cell != null) {
+                String codeValue = cell.getStringCellValue();
+                codeMap.put(codeValue, rowNum);
+            }
         }
 
         return codeMap;
