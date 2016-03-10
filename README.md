@@ -16,6 +16,8 @@ Command for collecting all languages' POD progress and save the progress to trac
 
 collectPODTracking.properties sample.
 ```
+application.start=true
+
 command.name=collectPODTracking
 
 source.folder.path=/Users/longxiang/Desktop
