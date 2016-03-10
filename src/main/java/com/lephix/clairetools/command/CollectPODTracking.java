@@ -107,7 +107,8 @@ public class CollectPODTracking {
 
     private String extractLanguageCode(String fileName) {
         fileName = fileName.toLowerCase();
-        Pattern pattern = Pattern.compile(".*ui_(.*)_week.*");
+        String languageCodePattern = environment.getProperty("language.code.pattern");
+        Pattern pattern = Pattern.compile(languageCodePattern);
         Matcher matcher = pattern.matcher(fileName);
         if (matcher.find()) {
             return matcher.group(1);

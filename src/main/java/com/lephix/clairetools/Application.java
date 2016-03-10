@@ -25,6 +25,11 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        if (!environment.getProperty("application.start", boolean.class)) {
+            LOG.info("application.start is set to false. Exit.");
+            return;
+        }
+
         String commandName = environment.getProperty("command.name").trim();
         if (StringUtils.isEmpty(commandName)) {
             LOG.info("No command.name configuration found. Exit.");

@@ -21,6 +21,9 @@
     <logger name="com.lephix" level="INFO" additivity="true">
         <appender-ref ref="console"/>
     </logger>
+    <logger name="org.springframework" level="WARN" additivity="false">
+        <appender-ref ref="file"/>
+    </logger>
 
     <root level="INFO">
         <appender-ref ref="file"/>
