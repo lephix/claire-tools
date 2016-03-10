@@ -24,4 +24,5 @@ target.path=/Users/longxiang/Desktop/POD_Tracking_Sheet_2016.xlsx
 target.week.col=E
 target.lang.code.col=B
 target.lang.code.row.start=2
+language.code.pattern=.*ui_(.*)_week.*
 ```
