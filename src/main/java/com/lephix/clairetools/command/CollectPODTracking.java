@@ -79,8 +79,8 @@ public class CollectPODTracking {
     }
 
     private Map<String, Integer> buildCodeMap(Sheet sheet, Integer languageCodeCol, int languageCodeRowStart) {
-        Map<String, Integer> codeMap = Maps.newHashMap();
-        for (int rowNum = languageCodeRowStart; rowNum < sheet.getLastRowNum(); rowNum++) {
+        Map<String, Integer> codeMap = Maps.newLinkedHashMap();
+        for (int rowNum = languageCodeRowStart; rowNum <= sheet.getLastRowNum(); rowNum++) {
             Cell cell = sheet.getRow(rowNum).getCell(languageCodeCol);
             if (cell != null) {
                 String codeValue = cell.getStringCellValue();

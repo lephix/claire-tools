@@ -21,6 +21,7 @@ hs_err_pid*
 # Maven related
 /*/target/
 target
+logs
 
 # Netbeans related
 nb-configuration.xml
