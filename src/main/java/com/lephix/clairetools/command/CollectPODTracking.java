@@ -95,7 +95,7 @@ public class CollectPODTracking {
         try {
             Workbook sourceWb = WorkbookFactory.create(file);
             Sheet sheet = sourceWb.getSheetAt(0);
-            Number cellValue = sheet.getRow(37).getCell(1).getNumericCellValue();
+            Number cellValue = sheet.getRow(36).getCell(1).getNumericCellValue();
             sourceWb.close();
 
             return cellValue;

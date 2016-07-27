@@ -11,7 +11,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 
 /**
- *
+ * The entrance of the program.
+ * <p/>
  * Created by longxiang on 16/1/21.
  */
 @EnableAutoConfiguration
@@ -19,16 +20,23 @@ public class Application implements CommandLineRunner {
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
     Environment environment;
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-        if (!environment.getProperty("application.start", boolean.class)) {
-            LOG.info("application.start is set to false. Exit.");
+        try {
+            if (!environment.getProperty("application.start", boolean.class)) {
+                LOG.info("application.start is set to false. Exit.");
+                return;
+            }
+        } catch (Exception e) {
+            LOG.error("Please check the command line.");
             return;
         }
+
 
         String commandName = environment.getProperty("command.name").trim();
         if (StringUtils.isEmpty(commandName)) {
@@ -46,7 +54,7 @@ public class Application implements CommandLineRunner {
                     LOG.info("No command.name matches. Exit.");
             }
             LOG.info("{} command has been successfully executed.", commandName);
-        } catch (Exception e){
+        } catch (Exception e) {
             LOG.error("Some error happens. See details.", e);
         }
     }
