@@ -1,6 +1,7 @@
 package com.lephix.clairetools;
 
 import com.lephix.clairetools.command.CollectPODTracking;
+import com.lephix.clairetools.command.TermLanguageFinding;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,11 @@ public class Application implements CommandLineRunner {
             switch (commandName) {
                 case "collectPODTracking":
                     CollectPODTracking collectPODTracking = new CollectPODTracking(environment);
-                    collectPODTracking.run();
+                    collectPODTracking.call();
+                    break;
+                case "termLanguageFinding":
+                    TermLanguageFinding termLanguageFinding = new TermLanguageFinding(environment);
+                    termLanguageFinding.call();
                     break;
                 default:
                     LOG.info("No command.name matches. Exit.");

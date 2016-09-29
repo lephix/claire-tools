@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
 
 import java.io.*;
+import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Map;
@@ -17,7 +18,7 @@ import java.util.Map;
  *
  * Created by longxiang on 16/1/21.
  */
-public class CollectPODTracking {
+public class CollectPODTracking implements Callable<Boolean> {
     private static final Logger LOG = LoggerFactory.getLogger(CollectPODTracking.class);
 
     Environment environment;
@@ -26,7 +27,7 @@ public class CollectPODTracking {
         this.environment = environment;
     }
 
-    public void run() throws Exception {
+    public Boolean call() throws Exception {
         String sourceFolderPath = environment.getProperty("source.folder.path");
         String sourcePathPattern = environment.getProperty("source.path.pattern");
         String targetPath = environment.getProperty("target.path");
@@ -76,6 +77,8 @@ public class CollectPODTracking {
         FileOutputStream fos = new FileOutputStream(targetPath);
         targetWb.write(fos);
         fos.close();
+
+        return true;
     }
 
     private Map<String, Integer> buildCodeMap(Sheet sheet, Integer languageCodeCol, int languageCodeRowStart) {
